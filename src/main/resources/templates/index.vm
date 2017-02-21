@@ -1,0 +1,6 @@
+#include("page/head.html")
+<div id="wrapper">
+    #include("page/navbar.html")
+    #include("page/menu-left.html")
+    #include("page/index.html")
+</div>
