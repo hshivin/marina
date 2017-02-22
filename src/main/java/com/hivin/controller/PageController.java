@@ -18,17 +18,5 @@ public class PageController {
     return "index";
   }
 
-  @RequestMapping(value = "/editor", method = RequestMethod.GET)
-  public String editorView() {
-
-    return "editor";
-  }
-
-  @RequestMapping(value = "/screen", method = RequestMethod.GET)
-  public String screenView() {
-
-    return "screen";
-  }
-
 
 }
