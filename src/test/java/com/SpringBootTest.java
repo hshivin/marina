@@ -5,6 +5,7 @@ import com.hivin.configure.Master;
 import com.hivin.dao.TestDao;
 import com.hivin.service.ITestService;
 import com.hivin.vo.TestDO;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class SpringBootTest {
     @Test
     public void testApp() {
         TestDO user= testService.getTestDOById(7);
-        System.out.println("用户信息--" + user.getName());
+        Assert.assertNotNull(user);
     }
 
 }
