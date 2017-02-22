@@ -37,7 +37,6 @@ public class ControllerMonitor {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         String methodName = pjp.getSignature().getName(); //获取被拦截的方法名
-        Set<Object> allParams = new LinkedHashSet<>(); //保存所有请求参数，用于输出到日志中
 
         LOG.info("URL : {}", request.getRequestURL().toString());
         LOG.info("HTTP_METHOD : " + request.getMethod());
