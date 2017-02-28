@@ -306,7 +306,6 @@ public class StringUtil {
                 sb.append(strArray[i] + " ");
             }
         }
-        System.out.println(mLinkedSet);
         return sb.toString();
     }
 
@@ -377,8 +376,6 @@ public class StringUtil {
         result = result.replace("&shap;", "#").replace("&ques", "?");
         return result;
     }
-
-
 
 
 }

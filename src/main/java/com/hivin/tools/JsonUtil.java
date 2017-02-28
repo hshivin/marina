@@ -97,7 +97,7 @@ public class JsonUtil {
      * @param json2
      * @return
      */
-    public static boolean diff2Json(String json1, String json2) {
+    public static boolean diffTowJson(String json1, String json2) {
         boolean flag = false;
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode1 = null;
