@@ -1,4 +1,4 @@
-package com.hivin.vo;
+package com.hivin.model;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package com.hivin.dao;
 
-import com.hivin.vo.TestDO;
+import com.hivin.model.TestDO;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 

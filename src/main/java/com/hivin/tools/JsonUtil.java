@@ -62,37 +62,9 @@ public class JsonUtil {
         return retMap2;
     }
 
-
-    public static void getAllOrder(String[] array, int begin, int end) {
-        if (begin == end) {
-            String arrStr = "";
-            for (int i = 0; i < array.length; i++) {
-                arrStr += array[i];
-            }
-            list.add(arrStr);
-        } else {
-            for (int i = begin; i <= end; i++) {
-                // 交换数据
-                swap(array, begin, i);
-                getAllOrder(array, begin + 1, end);
-                swap(array, i, begin);
-            }
-        }
-    }
-
-    public static void swap(String[] array, int from, int to) {
-        // 这里应该加上各种防止无效交换的情况
-        // 比如位置相同，或者2个位置的数据相同
-        if (from == to) {
-            return;
-        }
-        String tmp = array[from];
-        array[from] = array[to];
-        array[to] = tmp;
-    }
-
     /**
      * diff two json
+     *
      * @param json1
      * @param json2
      * @return

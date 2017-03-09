@@ -75,6 +75,12 @@
             <!--<version>1.2.2.RELEASE</version>-->
         </dependency>
 
+        <!--spring-boot-configuration:spring boot 配置处理器; -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
