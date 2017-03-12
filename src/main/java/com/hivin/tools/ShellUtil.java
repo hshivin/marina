@@ -45,8 +45,8 @@ public class ShellUtil {
                 try {
                     bufferedReader.close();
                     //将Shell的执行情况输出到日志文件中
-                    logger.info("shell执行结果为:{}",stringBuffer.toString());
-                 } catch (Exception e) {
+                    logger.info("shell执行结果为:{}", stringBuffer.toString());
+                } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
                     try {
@@ -94,15 +94,46 @@ public class ShellUtil {
 
         } finally {
             if (bufferedReader != null) {
-                 try {
+                try {
                     bufferedReader.close();
-                    logger.info("shell执行结果为:{}",stringBuffer.toString());
+                    logger.info("shell执行结果为:{}", stringBuffer.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
         return success;
+    }
+
+    public static String excuteShell(String shellCommand) {
+
+        StringBuffer stringBuffer = new StringBuffer();
+        BufferedReader bufferedReader = null;
+        //格式化日期时间，记录日志时使用
+
+        try {
+
+            Process pid = null;
+            String[] cmd = {"/bin/sh", "-c", shellCommand};
+            //执行Shell命令
+            pid = Runtime.getRuntime().exec(cmd);
+            if (pid != null) {
+                //bufferedReader用于读取Shell的输出内容
+                bufferedReader = new BufferedReader(new InputStreamReader(pid.getInputStream()), 1024);
+                pid.waitFor();
+            } else {
+                stringBuffer.append("没有pid");
+            }
+            String line = null;
+            //读取Shell的输出内容，并添加到stringBuffer中
+            while (bufferedReader != null &&
+                    (line = bufferedReader.readLine()) != null) {
+                stringBuffer.append(line).append("\r\n");
+            }
+        } catch (Exception ioe) {
+
+        }
+        return stringBuffer.toString();
     }
 
 

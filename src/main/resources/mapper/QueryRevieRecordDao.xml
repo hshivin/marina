@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hivin.dao.QueryReviewRecordDao">
+
+    <resultMap id="queryReviewRecord" type="com.hivin.model.QueryReviewRecord">
+        <result property="id" column="id"/>
+        <result property="checksum" column="checksum"/>
+        <result property="sample" column="sample"/>
+        <result property="fingerprint" column="fingerprint"/>
+        <result property="distillate" column="distillate"/>
+        <result property="db" column="db"/>
+        <result property="host" column="host"/>
+        <result property="user" column="user"/>
+        <result property="queryCount" column="query_count"/>
+        <result property="tsMin" column="ts_min"/>
+        <result property="tsMax" column="ts_max"/>
+
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+        <result property="sample" column="sample"/>
+    </resultMap>
+
+    <sql id="allCols">
+
+
+    private Float queryTimeSum;
+    private Float queryTimeMin;
+    private Float queryTimeMax;
+    private Float queryTimePct95;
+    private Float queryTimeStddev;
+    private Float queryTimeMedian;
+
+    private Float lockTimeSum;
+    private Float lockTimeMin;
+    private Float lockTimeMax;
+    private Float lockTimePct95;
+    private Float lockTimeStddev;
+    private Float lockTimeMedian;
+
+    private Float rowsSentSum;
+    private Float rowsSentMin;
+    private Float rowsSentMax;
+    private Float rowsSentPct95;
+    private Float rowsSentStddev;
+    private Float rowsSentMedian;
+
+    private Float rowsExaminedSum;
+    private Float rowsExaminedMin;
+    private Float rowsExaminedMax;
+    private Float rowsExaminedPct95;
+    private Float rowsExaminedStddev;
+    private Float rowsExaminedMedian;
+
+    private Float rowsReadSum;
+    private Float rowsReadMin;
+    private Float rowsReadMax;
+    private Float rowsReadPct95;
+    private Float rowsReadStddev;
+    private Float rowsReadMedian;
+    </sql>
+
+    <insert id="insertOne" parameterType="com.hivin.model.QueryReviewRecord">
+        INSERT INTO query_review_record (
+        <include refid="allCols"/>
+        ) VALUES ();
+
+    </insert>
+
+
+</mapper>
