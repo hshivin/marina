@@ -63,10 +63,6 @@ public class JenkinsController {
         return buidNum;
     }
 
-    @RequestMapping(value = "/getBuildStatus/{jobName}", method = RequestMethod.GET)
-    public Boolean getBuildStatus(@PathVariable(value = "jobName") String jobName, @RequestParam(value = "buildNum") Integer buildNum) {
-        return buildService.getBuildStatus(jobName, buildNum);
-    }
 
     @RequestMapping(value = "/getAllJobs", method = RequestMethod.GET)
     public List<JobInfo> getAllJobs() {
