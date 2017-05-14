@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ShellUtil {
     static Logger logger = LoggerFactory.getLogger(ShellUtil.class);
@@ -133,7 +135,8 @@ public class ShellUtil {
         } catch (Exception ioe) {
 
         }
-        return stringBuffer.toString();
+        String res = stringBuffer.reverse().delete(0,2).reverse().toString();
+        return res;
     }
 
 

@@ -11,10 +11,10 @@ import java.util.Date;
  * @date:17/3/9
  */
 @Data
-public class QueryReviewRecord {
+public class QueryReviewRecordHistory {
 
     private Long id;
-    private Long checksum;
+    private String checksum;
     private String sample;
     private String fingerprint;
     private String distillate;
@@ -59,6 +59,8 @@ public class QueryReviewRecord {
     private Float rowsReadPct95;
     private Float rowsReadStddev;
     private Float rowsReadMedian;
+
+    private Date createTime;
 
 
 }

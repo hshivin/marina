@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hivin.dao.QueryReviewRecordHistoryDao">
+
+    <resultMap id="queryReviewRecord" type="com.hivin.model.QueryReviewRecordHistory">
+        <result property="id" column="id"/>
+        <result property="checksum" column="checksum"/>
+        <result property="sample" column="sample"/>
+        <result property="fingerprint" column="fingerprint"/>
+        <result property="distillate" column="distillate"/>
+        <result property="db" column="db"/>
+        <result property="host" column="host"/>
+        <result property="user" column="user"/>
+        <result property="queryCount" column="query_count"/>
+        <result property="tsMin" column="ts_min"/>
+        <result property="tsMax" column="ts_max"/>
+
+        <result property="queryTimeSum" column="query_time_sum"/>
+        <result property="queryTimeMin" column="query_time_min"/>
+        <result property="queryTimeMax" column="query_time_max"/>
+        <result property="queryTimePct95" column="query_time_pct_95"/>
+        <result property="queryTimeStddev" column="query_time_stddev"/>
+        <result property="queryTimeMedian" column="query_time_median"/>
+
+        <result property="lockTimeSum" column="lock_time_sum"/>
+        <result property="lockTimeMin" column="lock_time_min"/>
+        <result property="lockTimeMax" column="lock_time_max"/>
+        <result property="lockTimePct95" column="lock_time_pct_95"/>
+        <result property="lockTimeStddev" column="lock_time_stddev"/>
+        <result property="lockTimeMedian" column="lock_time_median"/>
+
+        <result property="rowsSentSum" column="rows_sent_sum"/>
+        <result property="rowsSentMin" column="rows_sent_min"/>
+        <result property="rowsSentMax" column="rows_sent_max"/>
+        <result property="rowsSentPct95" column="rows_sent_pct_95"/>
+        <result property="rowsSentStddev" column="rows_sent_stddev"/>
+        <result property="rowsSentMedian" column="rows_sent_median"/>
+
+        <result property="rowsExaminedSum" column="rows_examined_sum"/>
+        <result property="rowsExaminedMin" column="rows_examined_min"/>
+        <result property="rowsExaminedMax" column="rows_examined_max"/>
+        <result property="rowsExaminedPct95" column="rows_examined_pct_95"/>
+        <result property="rowsExaminedStddev" column="rows_examined_stddev"/>
+        <result property="rowsExaminedMedian" column="rows_examined_median"/>
+
+        <result property="rowsReadSum" column="rows_read_sum"/>
+        <result property="rowsReadMin" column="rows_read_min"/>
+        <result property="rowsReadMax" column="rows_read_max"/>
+        <result property="rowsReadPct95" column="rows_read_pct_95"/>
+        <result property="rowsReadStddev" column="rows_read_stddev"/>
+        <result property="rowsReadMedian" column="rows_read_median"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <sql id="allCols">
+      `id`
+     ,`checksum`
+     ,`sample`
+     ,`fingerprint`
+     ,`distillate`
+     ,`db`
+     ,`host`
+     ,`user`
+     ,`query_count`
+     ,`ts_min`
+     ,`ts_max`
+     ,`query_time_sum`
+     ,`query_time_min`
+     ,`query_time_max`
+     ,`query_time_pct_95`
+     ,`query_time_stddev`
+     ,`query_time_median`
+     ,`lock_time_sum`
+     ,`lock_time_min`
+     ,`lock_time_max`
+     ,`lock_time_pct_95`
+     ,`lock_time_stddev`
+     ,`lock_time_median`
+     ,`rows_sent_sum`
+     ,`rows_sent_min`
+     ,`rows_sent_max`
+     ,`rows_sent_pct_95`
+     ,`rows_sent_stddev`
+     ,`rows_sent_median`
+     ,`rows_examined_sum`
+     ,`rows_examined_min`
+     ,`rows_examined_max`
+     ,`rows_examined_pct_95`
+     ,`rows_examined_stddev`
+     ,`rows_examined_median`
+     ,`rows_read_sum`
+     ,`rows_read_min`
+     ,`rows_read_max`
+     ,`rows_read_pct_95`
+     ,`rows_read_stddev`
+     ,`rows_read_median`
+     ,`create_time`
+    </sql>
+
+    <insert id="insertOne" parameterType="com.hivin.model.QueryReviewRecordHistory" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO query_review_record_history (
+        <include refid="allCols"/>
+        ) VALUES (
+        #{id}
+        ,#{checksum}
+        ,#{sample}
+        ,#{fingerprint}
+        ,#{distillate}
+        ,#{db}
+        ,#{host}
+        ,#{user}
+        ,#{queryCount}
+        ,#{tsMin}
+        ,#{tsMax}
+
+        ,#{queryTimeSum}
+        ,#{queryTimeMin}
+        ,#{queryTimeMax}
+        ,#{queryTimePct95}
+        ,#{queryTimeStddev}
+        ,#{queryTimeMedian}
+
+        ,#{lockTimeSum}
+        ,#{lockTimeMin}
+        ,#{lockTimeMax}
+        ,#{lockTimePct95}
+        ,#{lockTimeStddev}
+        ,#{lockTimeMedian}
+
+        ,#{rowsSentSum}
+        ,#{rowsSentMin}
+        ,#{rowsSentMax}
+        ,#{rowsSentPct95}
+        ,#{rowsSentStddev}
+        ,#{rowsSentMedian}
+
+        ,#{rowsExaminedSum}
+        ,#{rowsExaminedMin}
+        ,#{rowsExaminedMax}
+        ,#{rowsExaminedPct95}
+        ,#{rowsExaminedStddev}
+        ,#{rowsExaminedMedian}
+
+        ,#{rowsReadSum}
+        ,#{rowsReadMin}
+        ,#{rowsReadMax}
+        ,#{rowsReadPct95}
+        ,#{rowsReadStddev}
+        ,#{rowsReadMedian}
+
+        ,#{createTime}
+        );
+
+    </insert>
+
+    <select id="checkByChecksum" resultType="int">
+          SELECT count(1) FROM query_review_record_history WHERE checksum = #{checksum}
+    </select>
+
+
+</mapper>
