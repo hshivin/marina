@@ -30,5 +30,14 @@ public class JenkinsBean {
         return jenkinsServer;
     }
 
+    public JenkinsServer getJenkinsServer(String urlPath) {
+        try {
+            this.jenkinsServer = new JenkinsServer(new URI(secretInfo.getUrl()+urlPath), secretInfo.getUsername(), secretInfo.getPassword());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        return jenkinsServer;
+    }
+
 
 }

@@ -7,6 +7,7 @@ import com.hivin.vo.JobInfo;
 import com.offbytwo.jenkins.JenkinsServer;
 import com.offbytwo.jenkins.model.Job;
 import com.offbytwo.jenkins.model.JobWithDetails;
+import com.offbytwo.jenkins.model.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -55,5 +56,17 @@ public class IJekinsServiceImpl implements IJenkinsService {
             log.info("jekins返回job异常：{}", e);
         }
         return list;
+    }
+
+    @Override
+    public List<Plugin> getAllPlugins() {
+        List<Plugin> plugins = new ArrayList<>();
+        try {
+            plugins = jenkinsBean.getJenkinsServer().getPluginManager().getPlugins();
+        } catch (Exception e) {
+
+        }
+        return plugins;
+
     }
 }

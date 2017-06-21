@@ -1,4 +1,4 @@
-package com.hivin.vo;
+package com.hivin.param;
 
 import lombok.Data;
 import org.apache.ibatis.annotations.Param;

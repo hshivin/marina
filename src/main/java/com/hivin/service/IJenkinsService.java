@@ -1,6 +1,7 @@
 package com.hivin.service;
 
 import com.hivin.vo.JobInfo;
+import com.offbytwo.jenkins.model.Plugin;
 
 import java.io.IOException;
 import java.util.List;
@@ -26,4 +27,6 @@ public interface IJenkinsService {
      * @return
      */
     public List<JobInfo> getAllJobs();
+
+    List<Plugin> getAllPlugins();
 }

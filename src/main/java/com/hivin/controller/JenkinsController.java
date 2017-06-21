@@ -1,23 +1,17 @@
 package com.hivin.controller;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.hivin.service.IBuildService;
 import com.hivin.service.IJenkinsService;
 import com.hivin.service.IJobService;
 import com.hivin.tools.BeanTool;
 import com.hivin.vo.GitBranchInfo;
 import com.hivin.vo.JobInfo;
-import com.hivin.vo.JobParam;
-import com.sun.istack.internal.NotNull;
-import org.apache.commons.beanutils.BeanMap;
+import com.hivin.param.JobParam;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

@@ -1,7 +1,10 @@
 package com;
 
+import com.hivin.service.IJenkinsService;
 import com.hivin.service.IJobService;
 import com.hivin.tools.HttpUtil;
+import com.offbytwo.jenkins.model.Plugin;
+import org.apache.http.HttpResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.test.context.ActiveProfiles;
@@ -9,6 +12,7 @@ import org.springframework.test.context.ActiveProfiles;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -22,8 +26,14 @@ import java.util.Map;
 @ActiveProfiles(value = "dev")
 public class SpringBootTest extends CaseBase {
 
+    protected TeamCreateModel teamCreateMode = TeamCreateFactory.teamCreateMode;
+
+
     @Resource(name = "jobService")
     IJobService jobService;
+
+    @Resource(name = "jkService")
+    IJenkinsService jenkinsService;
 
     @Test
     public void testJobService() {
@@ -34,19 +44,41 @@ public class SpringBootTest extends CaseBase {
 //        Map<String, String> map = new HashMap<>();
 //        map.put("branch", "auth");
 //        jobService.buildJob(jobName, map);
+
+         System.out.println(teamCreateMode.getTeamName());
+
+    }
+
+    @Test
+    public void testAllPlugins() {
+
+        List<Plugin> plugins = jenkinsService.getAllPlugins();
+        for (Plugin plugin : plugins) {
+            if (plugin.getUrl().contains("gitparameter.GitParameterDefinition")) {
+                String s = plugin.getUrl();
+            }
+        }
+
     }
 
 
     public static void main(String[] args) {
 
-        String path = "http://127.0.0.1:8088/job/second/descriptorByName/net.uaznia.lukanus.hudson.plugins.gitparameter.GitParameterDefinition/fillValueItems";
-        String cookie = "JSESSIONID.87dcef25=cm5xeh8mg48i1fivectvx7r9j; JSESSIONID.cdb34009=wwxpxagtny40d71z2mt3krgm; JSESSIONID.6dcdcef6=mp0li8fblh17b96yfge6y8o2; JSESSIONID.ebd19cd2=1djaed5v82osbc3zqa8nikh75; JSESSIONID.8966a134=1asfdke9z5owtgdmtu89wquyu; jenkins-timestamper-offset=-28800000; JSESSIONID.aae6e747=e8aoc9hkenlz1xixwsl6x1sd9; ACEGI_SECURITY_HASHED_REMEMBER_ME_COOKIE=YWRtaW46MTQ4OTU0MjIzMTc1MDpjNjg5MzYyNjA3MmU0MzI1YTdjMTFlNzYwZTE4MTRhZGYwNjQzZjE3Mjk1NDMzNjVmYzIzYzIzOWI5NDBhMWJl; JSESSIONID.cdc2e27c=2cyib9mo0dar1psy7vgepzvpy; JSESSIONID.b306c367=dhjenp5jt6zw1zshp28iuszf; screenResolution=1280x800";
-        String jenkinsCrumb = "3a91a0940edfa57adbb178bb636e2fee";
-        String s=HttpUtil.getGitBranch(path,"param=branch");
-        System.out.println(s);
+        String response = "";
+        String path = "j_acegi_security_check?lang=en_US";
+        Map<String, String> map = new HashMap();
+        map.put("j_username", "admin");
+        map.put("j_password", "Wang123@");
+        map.put("from", "/");
+        map.put("Jenkins-Crumb", "f334bbad5532e280fbd3e59d0cb84b0b");
+        map.put("json", "{\"j_username\": \"admin\", \"j_password\": \"Wang123@\", \"remember_me\": false, \"from\": \"/\", \"Jenkins-Crumb\": \"f334bbad5532e280fbd3e59d0cb84b0b\"}");
+        map.put("Submit", "登录");
 
-         //        Map<String, String> map = new HashMap<>();
-//        map.put("branch", "auth");
-//        jobService.buildJob(jobName, map);
+        String url = "http://127.0.0.1:8088/job/first/descriptorByName/net.uaznia.lukanus.hudson.plugins.gitparameter.GitParameterDefinition/fillValueItems?param=branch&lang=en_US";
+
+        String header = HttpUtil.getCookie("http://127.0.0.1:8088/" + path, map);
+//         header="JSESSIONID.315a3e2b=ormwv8ctevkvz98qnebvm498;Path=/;HttpOnly";
+        response = HttpUtil.getGitBranch(url, "param=branch", header);
+
     }
 }

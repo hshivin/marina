@@ -12,6 +12,7 @@ import com.hivin.vo.*;
 import com.offbytwo.jenkins.JenkinsServer;
 import com.offbytwo.jenkins.client.JenkinsHttpClient;
 import com.offbytwo.jenkins.model.*;
+import org.apache.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,8 @@ public class IJobServiceImpl implements IJobService {
     Logger log = LoggerFactory.getLogger(IJobServiceImpl.class);
     @Resource
     JenkinsBean jenkinsBean;
+    @Resource
+    SecretInfo secretInfo;
 
     @Override
     public JobInfo getJobInfo(String jobName) {
@@ -63,16 +66,22 @@ public class IJobServiceImpl implements IJobService {
         return jobInfo;
     }
 
-
+    /**
+     * @param jobName
+     * @return
+     */
     @Override
     public List<GitBranchInfo> getJobGitBranchAndBatch(String jobName) {
         List<GitBranchInfo> list = new ArrayList<>();
         try {
             JobWithDetails jobWithDetails = jenkinsBean.getJenkinsServer().getJob(jobName);
-            if (jobWithDetails == null) return list;
+            if (jobWithDetails == null) {
+                log.warn("{}-获取git分支失败", jobName);
+                return list;
+            }
             String url = jobWithDetails.getUrl();
             String path = "descriptorByName/net.uaznia.lukanus.hudson.plugins.gitparameter.GitParameterDefinition/fillValueItems?param=branch";
-            String response = HttpUtil.getGitBranch(url + path, "param=branch");
+            String response = HttpUtil.getGitBranch(url + path, "param=branch",null);
             if (response == null || response.length() == 0) return list;
             JSONObject jsonObject = JSON.parseObject(response);
             JSONArray jsonArray = jsonObject.getJSONArray("values");
@@ -83,6 +92,22 @@ public class IJobServiceImpl implements IJobService {
         }
         return list;
     }
+
+    private String getGitBranch(String url, Map<String, String> param) {
+        String response = "";
+        String path = "j_acegi_security_check";
+        Map<String, String> map = new HashMap();
+        map.put("j_username", secretInfo.getUsername());
+        map.put("j_password", secretInfo.getPassword());
+        map.put("from", "/");
+        map.put("Jenkins-Crumb", "f334bbad5532e280fbd3e59d0cb84b0b");
+        map.put("json", "{\"j_username\": \"admin\", \"j_password\": \"Wang123@\", \"remember_me\": false, \"from\": \"/\", \"Jenkins-Crumb\": \"f334bbad5532e280fbd3e59d0cb84b0b\"}");
+        map.put("Submit", "登录");
+        response = HttpUtil.getGitBranch(url, param, secretInfo.getUrl() + path, map);
+
+        return response;
+    }
+
 
     @Override
     public String getJobConfigure(String jobName) {
